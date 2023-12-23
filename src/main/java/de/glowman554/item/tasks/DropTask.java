@@ -27,8 +27,11 @@ public class DropTask extends BukkitRunnable
 		ItemStack item = items.get(random.nextInt(items.size()));
 		Location location = drop.toLocation(world);
 
-		world.dropItem(location, item);
-		Particles.spawnParticleEffect(location, Particle.SMOKE_NORMAL, 10, 20 * 10);
+		if (world.isChunkLoaded(location.getBlockX() >> 4, location.getBlockZ() >> 4))
+		{
+			world.dropItem(location, item);
+			Particles.spawnParticleEffect(location, Particle.SMOKE_NORMAL, 10, 20 * 10);
+		}
 	}
 
 }
